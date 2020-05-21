@@ -1,13 +1,13 @@
-# Big Brother Retail - Sponsored Related Products Component
+# Ucayali - Related Products Component
 
-> Replication of a popular e-commerce site's basic product page. This repo is for a single component - the sponsored related posts carousel.
+> Services for an e-commerce site's basic product page. This repo is for a single component - the sponsored products carousel.
 
 ## Related Projects
 
-  - https://github.com/hrr45-fec8-legolas/single-item-page
-  - https://github.com/hrr45-fec8-legolas/item-details
-  - https://github.com/hrr45-fec8-legolas/reviews
-  - https://github.com/hrr45-fec8-legolas/proxy-legolas-jmaughan
+  - https://github.com/Ucayali/Michael-Service
+  - https://github.com/Ucayali/Matt-Service
+  - https://github.com/Ucayali/Review-Service
+  - https://github.com/Ucayali/a-tiller-proxy
 
 ## Table of Contents
 
@@ -44,3 +44,11 @@ From within the root directory:
 npm install
 ```
 
+## API
+
+|  Method      |  Endpoint                           |  Action                                                |
+| ------------ | ----------------------------------- | ------------------------------------------------------ |
+|  **POST**    |  /api/related_products/*PID*/       |  Creates record *PID*                                  |
+|  **GET**     |  /api/related_products/*PID*        |  Response body contains related products for *PID*     |
+|  **PATCH**   |  /api/related_products/*PID*/*SID*  |  Adds a recommendation for *SID* to record *PID*       |
+|  **DELETE**  |  /api/related_products/*PID*/*SID*  |  Removes a recommendation for *SID* from record *PID*  |

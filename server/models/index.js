@@ -14,6 +14,19 @@ module.exports = {
         callback(err, results);
       });
     },
+    patchRelated(productId, relatedId, callback = () => {}) {
+      const sql = 'INSERT INTO productCategories (id_products, id_categories) VALUES (?, (SELECT id FROM categories WHERE id_products=? LIMIT 1))';
+      db.query(sql, [relatedId, productId], (err, results) => {
+        callback(err, results);
+      });
+    },
+    deleteRelated(productId, relatedId, callback = () => {}) {
+      const sql = '';
+      // this seems awkward in the legacy schema, but will be straightforward in the new schema.
+      db.query(sql, [productId, relatedId], (err, results) => {
+        callback(err, results);
+      });
+    },
   },
 
   categories: {
