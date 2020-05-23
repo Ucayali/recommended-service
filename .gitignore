@@ -21,6 +21,7 @@ coverage
 .grunt
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
+data/
 build/
 public/
 !public/*.html
