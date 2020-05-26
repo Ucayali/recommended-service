@@ -5,7 +5,7 @@ const faker = require('faker');
 const writer = csvWriter();
 
 const TOTAL = 10000000;
-let idCounter = 1;
+let idCounter = 0;
 
 function imageFile() {
   return Math.ceil(Math.random() * 988).toString().padStart(4, '0');
@@ -13,19 +13,14 @@ function imageFile() {
 
 function makeLine(id) {
   const obj = {};
-  const numRecommended = 20 + Math.ceil(Math.random() * 30);
 
-  obj.id = id;
   obj.productId = id;
   obj.name = faker.commerce.productName();
   obj.price = faker.commerce.price(5.00, 75.00, 2);
+  obj.prime = Math.floor(Math.random() * 2);
   obj.imageUrl = `http://ds6fr0ymcho38.cloudfront.net/${imageFile()}.jpg`;
   obj.numReviews = Math.ceil(Math.random() * 250);
-  obj.avgRating = Math.ceil(Math.random() * 5);
-
-  for (let i = 0; i < numRecommended; i += 1) {
-    obj[i] = Math.ceil(Math.random() * 10000000);
-  }
+  obj.avgRating = (Math.floor((Math.random() * 6) + 5)) / 2;
 
   return obj;
 }
@@ -38,7 +33,7 @@ function done() {
 function write() {
   let ok = true;
 
-  while (idCounter <= TOTAL && ok) {
+  while (idCounter < TOTAL && ok) {
     idCounter += 1;
 
     if (idCounter === TOTAL) {
