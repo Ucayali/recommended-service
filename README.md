@@ -48,7 +48,7 @@ npm install
 
 |  Method      |  Endpoint                           |  Action                                                |
 | ------------ | ----------------------------------- | ------------------------------------------------------ |
-|  **POST**    |  /api/related_products/*PID*/       |  Creates record *PID*                                  |
+|  **POST**    |  /api/related_products/*            |  Creates recommendation based on body object           |
 |  **GET**     |  /api/related_products/*PID*        |  Response body contains related products for *PID*     |
 |  **PATCH**   |  /api/related_products/*PID*/*SID*  |  Adds a recommendation for *SID* to record *PID*       |
 |  **DELETE**  |  /api/related_products/*PID*/*SID*  |  Removes a recommendation for *SID* from record *PID*  |

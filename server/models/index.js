@@ -1,4 +1,4 @@
-const { client, mapper } = require('../database');
+const { client } = require('../database');
 
 module.exports = {
   getRelated(id, callback) {
@@ -32,13 +32,32 @@ module.exports = {
         callback(err, null);
       });
   },
-  addNew(obj) {
-    console.log('Adding:\n', obj);
+  addNew(jsObj, callback) {
+    const query = 'INSERT INTO ucayali_recommended.recommendations (productid, pairid, name, price, prime, imageurl, numreviews, avgrating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const params = [
+      jsObj.id,
+      jsObj.productId,
+      jsObj.name,
+      jsObj.price,
+      jsObj.prime,
+      jsObj.imageUrl,
+      jsObj.numReviews,
+      jsObj.avgRating,
+    ];
+
+    client.execute(query, params, { prepare: true })
+      .then((result) => {
+        callback(null, result);
+      })
+      .catch((err) => {
+        console.log(err);
+        callback(err, null);
+      });
   },
-  patchRelated(from, to) {
+  patchRelated(from, to, callback) {
     console.log(`Adding a recommendation to ${from} for ${to}.`);
   },
-  deleteRelated(from, to) {
+  deleteRelated(from, to, callback) {
     console.log(`Deleting a recommendation from ${from} for ${to}.`);
   },
 };
