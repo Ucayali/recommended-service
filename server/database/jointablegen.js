@@ -9,10 +9,9 @@ let idCounter = 1;
 let countdown = 20 + Math.ceil(Math.random() * 30);
 
 
-function makeLine(id) {
+function makeLine() {
   const obj = {};
 
-  obj.id = id;
   obj.productId = idCounter;
   obj.pairId = Math.ceil(Math.random() * 10000000);
 
@@ -32,9 +31,9 @@ function write() {
     countdown -= 1;
 
     if (idCounter === TOTAL && countdown === 0) {
-      writer.write(makeLine(rowCounter), done);
+      writer.write(makeLine(), done);
     } else {
-      ok = writer.write(makeLine(rowCounter));
+      ok = writer.write(makeLine());
     }
 
     if (countdown === 0) {
