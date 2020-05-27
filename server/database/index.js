@@ -8,8 +8,13 @@ const client = new cassandra.Client({
   keyspace: 'ucayali_recommended',
 });
 
+const mapper = new cassandra.mapping.Mapper(client, {
+
+});
+
 client.connect(() => {
   console.log('Connected to Cassandra!');
 });
 
-module.exports = client;
+module.exports.client = client;
+module.exports.mapper = mapper;

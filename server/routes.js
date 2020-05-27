@@ -4,7 +4,7 @@ const models = require('./models');
 const router = express.Router();
 
 router.get('/related_products/:id', (req, res) => {
-  models.products.getRelated(req.params.id, (err, results) => {
+  models.getRelated(req.params.id, (err, results) => {
     if (err) {
       res.status(500).send('Something went wrong!');
     } else {
@@ -14,7 +14,7 @@ router.get('/related_products/:id', (req, res) => {
 });
 
 router.post('/related_products/', (req, res) => {
-  models.products.addNew(req.body, (err, results) => {
+  models.addNew(req.body, (err, results) => {
     if (err) {
       res.status(500).send('Something went wrong!');
     } else {
@@ -24,7 +24,7 @@ router.post('/related_products/', (req, res) => {
 });
 
 router.patch('/related_products/:pid/:sid', (req, res) => {
-  models.products.patchRelated(req.params.pid, req.params.sid, (err, results) => {
+  models.patchRelated(req.params.pid, req.params.sid, (err, results) => {
     if (err) {
       res.status(500).send('Something went wrong!');
     } else {
@@ -34,7 +34,7 @@ router.patch('/related_products/:pid/:sid', (req, res) => {
 });
 
 router.delete('/related_products/:pid/:sid', (req, res) => {
-  models.products.deleteRelated(req.params.pid, req.params.sid, (err, results) => {
+  models.deleteRelated(req.params.pid, req.params.sid, (err, results) => {
     if (err) {
       res.status(500).send('Something went wrong!');
     } else {
