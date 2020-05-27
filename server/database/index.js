@@ -1,12 +1,15 @@
-const mysql = require('mysql');
-require('dotenv').config();
+const cassandra = require('cassandra-driver');
 
-const db = mysql.createPool({
-  connectionLimit: 10,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  //password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+const HOSTS = ['127.0.0.1'];
+
+const client = new cassandra.Client({
+  contactPoints: HOSTS,
+  localDataCenter: 'datacenter1',
+  keyspace: 'ucayali_recommended',
 });
 
-module.exports = db;
+client.connect(() => {
+  console.log('Connected to Cassandra!');
+});
+
+module.exports.client = client;
