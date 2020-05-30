@@ -1,0 +1,34 @@
+config:
+  target: 'http://127.0.0.1:3003'
+  http:
+    pool: 100
+  processor: './test-functions.js'
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      rampTo: 200
+      name: 'warmup'
+    - duration: 180
+      arrivalRate: 200
+      name: 'looping 5 requests at 200 arrivals per second'
+  defaults:
+    headers:
+scenarios:
+  - name: 'post recommendations'
+    weight: 1
+    flow:
+      -  count: 5
+         loop:
+          - function: 'generateRecord'
+          - post:
+              url: '/api/related_products/'
+              json:
+                id: "{{ id }}"
+                productId: "{{ productId }}"
+                name: "{{ name }}"
+                price: "{{ price }}"
+                prime: "{{ prime }}"
+                imageUrl: "{{ imageUrl }}"
+                numReviews: "{{ numReviews }}"
+                avgRating: "{{ avgRating }}"
+          - think: 3

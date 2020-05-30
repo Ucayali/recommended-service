@@ -1,0 +1,28 @@
+config:
+  target: 'http://127.0.0.1:3003'
+  http:
+    pool: 300
+  processor: './test-functions.js'
+  phases:
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 1200
+      name: 'warmup'
+    - duration: 300
+      arrivalRate: 1200
+      name: '1200 arrivals per second, no looping'
+  defaults:
+    headers:
+scenarios:
+  - name: 'Bottom 9000000'
+    weight: 1
+    flow:
+      - function: 'generateLowId'
+      - get:
+         url: '/api/related_products/{{ id }}'
+  - name: 'Top 1000000'
+    weight: 9
+    flow:
+      - function: 'generateHighId'
+      - get:
+         url: '/api/related_products/{{ id }}'
