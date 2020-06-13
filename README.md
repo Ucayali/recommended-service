@@ -1,34 +1,30 @@
 # Ucayali - Related Products Component
 
-> Services for an e-commerce site's basic product page. This repo is for a single component - the sponsored products carousel.
+> A microservice that provides the related products carousel for the item detail page of an general e-commerce website.
 
 ## Related Projects
 
-  - https://github.com/Ucayali/Michael-Service
-  - https://github.com/Ucayali/Matt-Service
-  - https://github.com/Ucayali/Review-Service
-  - https://github.com/Ucayali/a-tiller-proxy
+  - [Item Images Module](https://github.com/Ucayali/Michael-Service)
+  - [Item Details Module](https://github.com/Ucayali/Matt-Service)
+  - [Product Reviews Module](https://github.com/Ucayali/Review-Service)
+  - [Dummy Image Script](https://github.com/Ucayali/dummy-imager)
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
 
 ## Usage
 
-> This component uses mysql for a DBMS. Please ensure that mysql is running and import the schema.sql file, then execute `npm run seed` to seed your database.
-
-- `npm run build` Runs webpack in production mode
-- `npm start` Starts server listening on port 3003
-
-Visit http://localhost:3003/?id=[id] to view the related products for product id [id]. (Note: seed file generates product info for product id's 1-100. Visiting any id outside that range or exluding an id in the url parameter will load the message "No product selected.")
+A seeding script is provided for generating dummy data for testing purposes. This script is intended to be paired with the script (linked above) for fetching, resizing, compressing, and hosting product images for testing purposes. Scripts are provided to produces a product listing and a join table (in SQL style) to allow for flexibility in data shape, but if the join table script is used test data will then need to be denormalized to fit the Cassandra data model provided.
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
-- Node 10.15.3
+- Node 10+
+- Cassandra 3+
 
 ## Development
 
@@ -50,5 +46,4 @@ npm install
 | ------------ | ----------------------------------- | ------------------------------------------------------ |
 |  **POST**    |  /api/related_products/*            |  Creates recommendation based on body object           |
 |  **GET**     |  /api/related_products/*PID*        |  Response body contains related products for *PID*     |
-|  **PATCH**   |  /api/related_products/*PID*/*SID*  |  Adds a recommendation for *SID* to record *PID*       |
-|  **DELETE**  |  /api/related_products/*PID*/*SID*  |  Removes a recommendation for *SID* from record *PID*  |
+
